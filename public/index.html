@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="nopoApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NoPo List</title>
+
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyByuiKIkDWrYuvfCfzVynVnCKbc2sNpnH4",
+        authDomain: "nopo-list.firebaseapp.com",
+        databaseURL: "https://nopo-list.firebaseio.com",
+        projectId: "nopo-list",
+        storageBucket: "nopo-list.appspot.com",
+        messagingSenderId: "11677452771"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js">
+    </script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css">
+
+
+
+  </head>
+  <body>
+
+    <div class="pure-g">
+      <div class="pure-u-1-1 u-centerText">
+        <h1>NoPo List</h1>
+      </div>
+    </div>
+
+    <div
+      ng-controller="NoPoListController as nopoList"
+      class="pure-g">
+      <div class="pure-u-1-1 l-box">
+        <form class="pure-form pure-form-stacked">
+          <fieldset>
+            <label
+              ng-repeat="item in nopoList.items"
+              class="pure-checkbox u-grow-2 u-padTopBottom-1 NoPo-Item">
+              <input
+                ng-model="item.done"
+                type="checkbox">
+              <span class="is-{{item.done}}">{{item.label}}</span>
+            </label>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
