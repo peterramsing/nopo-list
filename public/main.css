@@ -19,6 +19,10 @@
   padding-bottom: 0.25rem;
 }
 
+.u-floatRight {
+  float: right;
+}
+
 /* Pure */
 .l-box {
   padding: 1em;

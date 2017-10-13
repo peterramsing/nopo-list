@@ -1,3 +1,6 @@
+var db = firebase.firestore();
+
+
 angular.module('nopoApp', [])
   .controller('NoPoListController', function() {
     var nopoList = this;
@@ -10,5 +13,12 @@ angular.module('nopoApp', [])
         label: 'test2',
         done: true,
       }
-    ]
+    ];
+
+    nopoList.addItem = function() {
+      db.collection('items').add({
+        label: nopoList.newItemLabel,
+        done: false,
+      });
+    }
   })
