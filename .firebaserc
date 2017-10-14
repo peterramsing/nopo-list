@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "nopo-list"
+    "default": "nopo-list",
+    "production": "nopo-list-produc"
   }
 }
