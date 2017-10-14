@@ -17,4 +17,17 @@
       </label>
     </div>
   </div>
+
+  <div class="pure-u-1-1 l-box">
+    <form class="pure-form">
+      <input
+        [(ngModel)]="newItem"
+        [ngModelOptions]="{standalone: true}"
+        class="pure-input-1"
+        type="text"
+        placeholder="New item...">
+
+      <button (click)="submitNewItem()" type="submit" class="pure-button pure-button-primary u-floatRight">Add Item</button>
+    </form>
+  </div>
 </div>

@@ -15,8 +15,11 @@ export class AppComponent {
   private itemCollection: AngularFirestoreCollection<Item>;
   private itemDoc: AngularFirestoreDocument<Item>; // NOTE: Maybe?
   items: Observable<ItemId[]>;
+  newItem: string;
 
   constructor(private afs: AngularFirestore) {
+    this.newItem = '';
+
     this.itemCollection = afs.collection<Item>('items');
     this.items = this.itemCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -30,5 +33,10 @@ export class AppComponent {
   toggleItemComplete(item: ItemId) {
     this.itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
     this.itemDoc.update({done: item.done, label: item.label});
+  }
+
+  submitNewItem() {
+    this.itemCollection.add({label: this.newItem, done: false});
+    this.newItem = '';
   }
 }
