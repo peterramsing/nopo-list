@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-export interface Item { label: string; done: boolean; }
+export interface Item { label: string; done: boolean; timestamp: number; }
 export interface ItemId extends Item { id: string; }
 
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private afs: AngularFirestore) {
     this.newItem = '';
 
-    this.itemCollection = afs.collection<Item>('items');
+    this.itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
     this.items = this.itemCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Item;
@@ -32,11 +32,20 @@ export class AppComponent {
 
   toggleItemComplete(item: ItemId) {
     this.itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
-    this.itemDoc.update({done: item.done, label: item.label});
+    this.itemDoc.update({
+      done: item.done,
+      label: item.label,
+      timestamp: item.timestamp,
+    });
   }
 
   submitNewItem() {
-    this.itemCollection.add({label: this.newItem, done: false});
+    if (this.newItem === '') { return }
+    this.itemCollection.add({
+      label: this.newItem,
+      done: false,
+      timestamp: Date.now(),
+    });
     this.newItem = '';
   }
 }

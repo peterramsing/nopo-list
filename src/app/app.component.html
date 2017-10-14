@@ -11,7 +11,7 @@
         class="pure-checkbox u-grow-2 u-padTopBottom-1 NoPo-Item">
         <input
           type="checkbox"
-          (change)="toggleItemComplete({done: !item.done, label: item.label, id: item.id})"
+          (change)="toggleItemComplete({done: !item.done, label: item.label, id: item.id, timestamp: item.timestamp})"
           [checked]="item.done">
         <span class="is-{{item.done}}">{{item.label}}</span>
       </label>
