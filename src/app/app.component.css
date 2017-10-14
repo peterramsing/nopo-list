@@ -1,0 +1,35 @@
+/* Utilities */
+.u-centerText {
+  text-align: center;
+}
+
+.u-grow-1 {
+  font-size: 1.1rem;
+}
+.u-grow-2 {
+  font-size: 1.2rem;
+}
+
+.u-padTopBottom-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.u-floatRight {
+  float: right;
+}
+
+/* Pure */
+.l-box {
+  padding: 1em;
+}
+
+/* App Stuff */
+.is-true {
+  text-decoration: line-through;
+  color: lightgrey;
+}
+
+.NoPo-Item {
+  border-bottom: 1px darkgrey solid;
+}
