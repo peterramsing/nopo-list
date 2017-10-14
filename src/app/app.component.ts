@@ -48,4 +48,11 @@ export class AppComponent {
     });
     this.newItem = '';
   }
+
+  deleteItem(item: ItemId) {
+    if (window.confirm(`Do you want to delete ${item.label}?`)) {
+      this.itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
+      this.itemDoc.delete();
+    }
+  }
 }
