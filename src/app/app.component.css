@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.u-shrink-3 {
+  font-size: 0.4rem;
+}
+
 .u-grow-1 {
   font-size: 1.1rem;
 }
@@ -32,9 +36,7 @@
 
 .NoPo-Item {
   border-bottom: 1px darkgrey solid;
-}
-
-.NoPo-Item-delete {
-  transform: translateY(2px);
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
