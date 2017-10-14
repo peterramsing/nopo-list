@@ -5,12 +5,35 @@
   <title>NopoList</title>
   <base href="/">
 
+  <meta name="viewport" content="user-scalable=no" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+
+  <link rel="manifest" href="assets/manifest.json">
+
   <link rel="icon" type="image/x-icon" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png" />
+  <link rel="apple-touch-startup-image" href="assets/splash.png"/>
 
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
 <body>
   <app-root></app-root>
+
+  <script src="assets/vendor/add-to-homescreen/addtohomescreen.min.js"></script>
+  <script>
+    var ath = addToHomescreen({
+      skipFirstVisit: false,
+      startDelay: 0,
+      lifespan: 20,
+      maxDisplayCount: 10
+    });
+  </script>
 </body>
+
+<link rel="stylesheet" type="text/css" href="assets/vendor/add-to-homescreen/addtohomescreen.min.css">
+
+
 </html>
