@@ -6,16 +6,15 @@
 
 <div class="pure-g">
   <div class="pure-u-1-1 l-box">
-    <form class="pure-form pure-form-stacked">
-      <fieldset>
-        <label *ngFor="let item of items | async"
-          class="pure-checkbox u-grow-2 u-padTopBottom-1 NoPo-Item">
-            <input
-              ng-model="item.done"
-              type="checkbox">
-            <span class="is-{{item.done}}">{{item.label}}</span>
-          </label>
-      </fieldset>
-    </form>
+    <div class="pure-form pure-form-stacked">
+      <label *ngFor="let item of items | async"
+        class="pure-checkbox u-grow-2 u-padTopBottom-1 NoPo-Item">
+        <input
+          type="checkbox"
+          (change)="toggleItemComplete({done: !item.done, label: item.label, id: item.id})"
+          [checked]="item.done">
+        <span class="is-{{item.done}}">{{item.label}}</span>
+      </label>
+    </div>
   </div>
 </div>
