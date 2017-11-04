@@ -27,12 +27,20 @@
   padding-bottom: 0.25rem;
 }
 
+.u-flexFloatRight {
+  margin-left: auto;
+}
+
 .u-floatLeft {
   float: left;
 }
 
 .u-floatRight {
   float: right;
+}
+
+.u-marginRight-1 {
+  margin-right: 1rem;
 }
 
 .u-noMargin {
