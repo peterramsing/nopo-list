@@ -19,8 +19,16 @@
   padding-bottom: 0.25rem;
 }
 
+.u-floatLeft {
+  float: left;
+}
+
 .u-floatRight {
   float: right;
+}
+
+.u-noMargin {
+  margin: 0!important;
 }
 
 /* Pure */
