@@ -3,6 +3,14 @@
   text-align: center;
 }
 
+.u-shrink-1 {
+  font-size: 0.8rem;
+}
+
+.u-shrink-2 {
+  font-size: 0.6rem;
+}
+
 .u-shrink-3 {
   font-size: 0.4rem;
 }
