@@ -12,16 +12,16 @@ export interface ItemId extends Item { id: string; }
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private itemCollection: AngularFirestoreCollection<Item>;
-  private itemDoc: AngularFirestoreDocument<Item>; // NOTE: Maybe?
+  private _itemCollection: AngularFirestoreCollection<Item>;
+  private _itemDoc: AngularFirestoreDocument<Item>; // NOTE: Maybe?
   items: Observable<ItemId[]>;
   newItem: string;
 
   constructor(private afs: AngularFirestore) {
     this.newItem = '';
 
-    this.itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
-    this.items = this.itemCollection.snapshotChanges().map(actions => {
+    this._itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
+    this.items = this._itemCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as Item;
         const id = a.payload.doc.id;
@@ -31,8 +31,8 @@ export class AppComponent {
   }
 
   toggleItemComplete(item: ItemId) {
-    this.itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
-    this.itemDoc.update({
+    this._itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
+    this._itemDoc.update({
       done: item.done,
       label: item.label,
       timestamp: item.timestamp,
@@ -41,7 +41,7 @@ export class AppComponent {
 
   submitNewItem() {
     if (this.newItem === '') { return }
-    this.itemCollection.add({
+    this._itemCollection.add({
       label: this.newItem,
       done: false,
       timestamp: Date.now(),
@@ -51,8 +51,8 @@ export class AppComponent {
 
   deleteItem(item: ItemId) {
     if (window.confirm(`Do you want to delete ${item.label}?`)) {
-      this.itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
-      this.itemDoc.delete();
+      this._itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
+      this._itemDoc.delete();
     }
   }
 }
