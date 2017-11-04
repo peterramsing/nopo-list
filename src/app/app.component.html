@@ -9,14 +9,16 @@
     <div class="pure-form pure-form-stacked">
       <div *ngFor="let item of items | async"
         class="NoPo-ItemContainer u-padTopBottom-1">
-        <label class="pure-checkbox u-grow-2 NoPo-Item">
-          <span>
-            <input [disabled]="item.quantity === item.purchased"
-              type="checkbox"
-              (change)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased+1})"
-              [checked]="item.quantity === item.purchased">
-            <span [ngClass]="{'is-done': item.quantity === item.purchased}">{{item.label}}</span>
-          </span>
+        <div class="NoPo-Item">
+          <label class="pure-checkbox u-grow-2 pure-u-1">
+            <span>
+              <input [disabled]="item.quantity === item.purchased"
+                type="checkbox"
+                (change)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased+1})"
+                [checked]="item.quantity === item.purchased">
+              <span [ngClass]="{'is-done': item.quantity === item.purchased}">{{item.label}}</span>
+            </span>
+          </label>
           <button (click)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased-1})"
             [hidden]="item.purchased === 0"
             class="pure-button u-shrink-3 u-flexFloatRight u-marginRight-1">
@@ -34,7 +36,7 @@
               <path d="M0 0h24v24H0z" fill="none"/>
             </svg>
           </button>
-        </label>
+        </div>
         <span *ngIf="item.quantity > 1"
           class="u-shrink-1">
           {{item.quantity - item.purchased}} Needed <span *ngIf="item.purchased > 0">• {{item.purchased}} Purchased</span>
