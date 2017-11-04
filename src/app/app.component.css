@@ -45,14 +45,21 @@
 }
 
 /* App Stuff */
-.is-true {
+.is-done {
   text-decoration: line-through;
   color: lightgrey;
 }
 
-.NoPo-Item {
+.NoPo-ItemContainer {
   border-bottom: 1px darkgrey solid;
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.NoPo-Item {
+  display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
 }

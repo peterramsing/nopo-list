@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-export interface Item { label: string; done: boolean; timestamp: number; quantity?: number; }
+export interface Item { label: string; timestamp: number; quantity?: number; purchased?: number}
 export interface ItemId extends Item { id: string; }
 export interface NewItem { name: string; quantity?: number; }
 
@@ -34,9 +34,9 @@ export class AppComponent {
   toggleItemComplete(item: ItemId) {
     this._itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
     this._itemDoc.update({
-      done: item.done,
       label: item.label,
       timestamp: item.timestamp,
+      purchased: item.purchased
     });
   }
 
@@ -44,8 +44,8 @@ export class AppComponent {
     if (this.newItem.name === '') { return }
     this._itemCollection.add({
       quantity: this.newItem.quantity,
+      purchased: 0,
       label: this.newItem.name,
-      done: false, // This might get complex...
       timestamp: Date.now(),
     });
     this.newItem = {name:'', quantity: 1};
