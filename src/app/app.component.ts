@@ -36,7 +36,7 @@ export class AppComponent {
     this._itemDoc.update({
       label: item.label,
       timestamp: item.timestamp,
-      purchased: item.purchased
+      purchased: item.purchased,
     });
   }
 
