@@ -52,7 +52,6 @@ export class AppComponent {
       gender: this.newItem.gender,
       essential: this.newItem.essential
     });
-    this.newItem = {name: ''};
   }
 
   deleteItem(item: ItemId) {

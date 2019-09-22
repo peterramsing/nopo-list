@@ -17,9 +17,13 @@
                 (change)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased+1, gender: item.gender, essential: item.essential})"
                 [checked]="item.quantity === item.purchased">
               <span [ngClass]="{'is-done': item.quantity === item.purchased}">{{item.label}}</span>
+              <span *ngIf="item.gender === 'girl'">👧</span>
+              <span *ngIf="item.gender === 'boy'">👦</span>
+              <small *ngIf="!item.essential"> (extra)</small>
+              <small *ngIf="item.essential"> (essential)</small>
             </span>
           </label>
-          <button (click)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased-1})"
+          <button (click)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased-1, essential: item.essential, gender: item.gender})"
             [hidden]="item.purchased === 0"
             class="pure-button u-shrink-3 u-flexFloatRight u-marginRight-1">
               <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -28,6 +32,7 @@
             </svg>
           </button>
           <button (click)=deleteItem(item)
+            *ngIf="showPowerToolsIndicator"
             type="button" class="pure-button u-shrink-3">
             <svg
               class="NoPo-Item-delete" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -53,16 +58,39 @@
         class="pure-input-1"
         type="text"
         placeholder="New item...">
-      <div class="pure-control-group">
-          <label for="itemQuantity">Quantity</label>
-          <input
-            id="itemQuantity"
-            class="u-floatLeft"
-            [(ngModel)]="newItem.quantity"
-            [ngModelOptions]="{standalone: true}"
-            type="number"
-            placeholder="Optional">
+      <div class="pure-u-1 pure-u-md-1-3">
+        <label for="itemQuantity">Quantity</label>
+        <input
+          id="itemQuantity"
+          class="u-floatLeft"
+          [(ngModel)]="newItem.quantity"
+          [ngModelOptions]="{standalone: true}"
+          type="number"
+          placeholder="Optional">
       </div>
+
+      <div class="pure-u-1 pure-u-md-1-3">
+          <label for="gender">Gender</label>
+          <select
+            id="gender"
+            class="pure-input-1-2"
+            [(ngModel)]="newItem.gender"
+            [ngModelOptions]="{standalone: true}"
+          >
+            <option>-</option>
+            <option>girl</option>
+            <option>boy</option>
+          </select>
+      </div>
+
+      <label for="essential" class="pure-checkbox">
+        <input
+          id="essential"
+          type="checkbox"
+          [(ngModel)]="newItem.essential"
+          [ngModelOptions]="{standalone: true}"
+        > Essential
+      </label>
       <button (click)="submitNewItem()" type="submit" class="pure-button pure-button-primary u-noMargin u-floatRight">Add Item</button>
     </form>
   </div>
