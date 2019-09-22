@@ -3,9 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-export interface Item { label: string; timestamp: number; quantity?: number; purchased?: number}
+export interface Item { label: string; timestamp: number; quantity?: number; purchased?: number; gender?: string; essential?: boolean;}
 export interface ItemId extends Item { id: string; }
-export interface NewItem { name: string; quantity?: number; }
+export interface NewItem { name: string; quantity?: number; gender?: string; essential?: boolean;}
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class AppComponent {
   newItem: NewItem;
 
   constructor(private afs: AngularFirestore) {
-    this.newItem = {name:'', quantity: 1};
+    this.newItem = {name: '', quantity: 1};
 
     this._itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
     this.items = this._itemCollection.snapshotChanges().map(actions => {
@@ -37,6 +37,8 @@ export class AppComponent {
       label: item.label,
       timestamp: item.timestamp,
       purchased: item.purchased,
+      gender: item.gender,
+      essential: item.essential
     });
   }
 
@@ -47,8 +49,10 @@ export class AppComponent {
       purchased: 0,
       label: this.newItem.name,
       timestamp: Date.now(),
+      gender: this.newItem.gender,
+      essential: this.newItem.essential
     });
-    this.newItem = {name:'', quantity: 1};
+    this.newItem = {name: ''};
   }
 
   deleteItem(item: ItemId) {

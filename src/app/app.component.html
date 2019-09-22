@@ -14,7 +14,7 @@
             <span>
               <input [disabled]="item.quantity === item.purchased"
                 type="checkbox"
-                (change)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased+1})"
+                (change)="toggleItemComplete({label: item.label, id: item.id, timestamp: item.timestamp, purchased: item.purchased+1, gender: item.gender, essential: item.essential})"
                 [checked]="item.quantity === item.purchased">
               <span [ngClass]="{'is-done': item.quantity === item.purchased}">{{item.label}}</span>
             </span>
