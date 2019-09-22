@@ -66,4 +66,10 @@
       <button (click)="submitNewItem()" type="submit" class="pure-button pure-button-primary u-noMargin u-floatRight">Add Item</button>
     </form>
   </div>
+  <hr>
+  <div class="pure-u-1-1 l-box" *ngIf="showPowerToolsIndicator">
+    <button (click)="deleteAllItems()" class="pure-button pure-button-secondary">
+      Delete all
+    </button>
+  </div>
 </div>

@@ -53,8 +53,33 @@ export class AppComponent {
 
   deleteItem(item: ItemId) {
     if (window.confirm(`Do you want to delete ${item.label}?`)) {
-      this._itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
-      this._itemDoc.delete();
+      this.doDelete(item);
     }
+  }
+
+  private doDelete(item: ItemId) {
+    this._itemDoc = this.afs.doc<ItemId>(`items/${item.id}`);
+    this._itemDoc.delete();
+  }
+
+  deleteAllItems() {
+    if (window.confirm(`Do you want to delete all of them?`)) {
+      const items = this._itemCollection.snapshotChanges().map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Item;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      });
+      items.subscribe(list => {
+        list.forEach(item => {
+          this.doDelete(item);
+        });
+      });
+    }
+  }
+
+  get showPowerToolsIndicator() {
+    return showPowerTools;
   }
 }
