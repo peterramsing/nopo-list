@@ -17,10 +17,11 @@ export class AppComponent {
   private _itemDoc: AngularFirestoreDocument<Item>; // NOTE: Maybe?
   items: Observable<ItemId[]>;
   newItem: NewItem;
+  showOnlyAvailableItems: boolean;
 
   constructor(private afs: AngularFirestore) {
     this.newItem = {name: '', quantity: 1, gender: '-', essential: false};
-
+    this.showOnlyAvailableItems = false;
     this._itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
     this.items = this._itemCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -84,5 +85,22 @@ export class AppComponent {
 
   get showPowerToolsIndicator() {
     return showPowerTools;
+  }
+
+  toggleAvailableFilter() {
+    this.showOnlyAvailableItems = !this.showOnlyAvailableItems;
+  }
+
+  /**
+   * Tells you whether to show the item based on if the filter is on or not
+   * @param item {Item} The item
+   */
+  showItem(item: Item): boolean {
+    if (this.showOnlyAvailableItems) {
+      if (item.purchased >= item.quantity) {
+        return false;
+      }
+    }
+    return true;
   }
 }
