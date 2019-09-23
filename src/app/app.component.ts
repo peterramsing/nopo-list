@@ -19,7 +19,7 @@ export class AppComponent {
   newItem: NewItem;
 
   constructor(private afs: AngularFirestore) {
-    this.newItem = {name: '', quantity: 1};
+    this.newItem = {name: '', quantity: 1, gender: '-', essential: false};
 
     this._itemCollection = afs.collection<Item>('items', ref => ref.orderBy('timestamp', 'desc'));
     this.items = this._itemCollection.snapshotChanges().map(actions => {
